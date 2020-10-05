@@ -1,5 +1,5 @@
 # KdMeuBichinho-BackEnd
-Back-End do Projeto final do curso de desenvolvimento Web Fullstack Java - Santander Coders em parceria com a DigitalHouse
+Back-End do Projeto final do curso de Desenvolvimento Web Fullstack Java - Santander Coders em parceria com a DigitalHouse
 
 <h4 align="center"> 
 	🚧  Kd meu bichinho? 👨‍🏫 em construção ✔️ 🚧
