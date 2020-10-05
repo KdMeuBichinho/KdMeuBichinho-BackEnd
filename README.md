@@ -1,6 +1,7 @@
 # KdMeuBichinho-BackEnd
 Back-End do Projeto final do curso de Desenvolvimento Web Fullstack Java - Santander Coders em parceria com a DigitalHouse
-
+<img src="./images/banner.png" alt="Logomarca do Cadê meu Bichinho"> 
+ 
 <h4 align="center"> 
 	🚧  Kd meu bichinho? 👨‍🏫 em construção ✔️ 🚧
 </h4>
