@@ -1,4 +1,4 @@
-package br.com.Kdmeubichinho.models.entities;
+package br.com.Kdmeubichinho.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
