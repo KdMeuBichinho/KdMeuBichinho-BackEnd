@@ -19,6 +19,8 @@ public class Pessoa {
 	private String celular;
 	private String senha;
 	
+	public Pessoa() {};
+	
 	public String getNome() {
 		return nome;
 	}

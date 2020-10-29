@@ -24,6 +24,8 @@ public class Animal {
 	private String nome;
 	private String cep;
 	
+	public Animal() {};
+	
 	public String getTipo() {
 		return tipo;
 	}
