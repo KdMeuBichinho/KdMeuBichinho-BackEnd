@@ -26,7 +26,6 @@ public class AnimalController {
 	public Animal addAnimal(@RequestBody Animal animal) {
 		animalRepository.save(animal);
 		return animal;
-		
 	}
 	
 }
