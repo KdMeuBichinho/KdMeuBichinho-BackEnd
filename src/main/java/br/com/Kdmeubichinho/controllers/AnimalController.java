@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.Kdmeubichinho.models.entities.Animal;
+import br.com.Kdmeubichinho.entities.Animal;
 import br.com.Kdmeubichinho.repositories.AnimalRepository;
 
 @RestController
@@ -26,7 +26,6 @@ public class AnimalController {
 	public Animal addAnimal(@RequestBody Animal animal) {
 		animalRepository.save(animal);
 		return animal;
-		
 	}
 	
 }
