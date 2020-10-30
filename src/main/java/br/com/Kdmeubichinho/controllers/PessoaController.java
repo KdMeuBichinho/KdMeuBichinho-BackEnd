@@ -51,7 +51,7 @@ public class PessoaController {
 		if(!dadosPessoa.getCelular().isEmpty()) myPessoa.setCelular(dadosPessoa.getCelular());
 		if(!dadosPessoa.getCep().isEmpty()) myPessoa.setCep(dadosPessoa.getCep());
 		if(!dadosPessoa.getRua().isEmpty()) myPessoa.setRua(dadosPessoa.getRua());
-		if(!dadosPessoa.getNumero().isEmpty()) myPessoa.setNumero(dadosPessoa.getNumero());
+		if(!dadosPessoa.getNumero_residencial().isEmpty()) myPessoa.setNumero_residencial(dadosPessoa.getNumero_residencial());
 		if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
 		
 		pessoaRepository.save(myPessoa);
