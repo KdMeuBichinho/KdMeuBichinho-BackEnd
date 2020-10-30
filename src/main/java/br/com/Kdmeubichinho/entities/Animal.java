@@ -1,17 +1,17 @@
 package br.com.Kdmeubichinho.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.Kdmeubichinho.enums.AnimalIdade;
+import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
 import br.com.Kdmeubichinho.enums.AnimalPorte;
 import br.com.Kdmeubichinho.enums.AnimalSexo;
-import br.com.Kdmeubichinho.enums.AnimalTipo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,71 +27,42 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
 	private Integer id_animal;
-	private AnimalTipo tipo;
-	@Enumerated(value = EnumType.STRING)
+	@Column(nullable = false)
 	private AnimalSexo sexo;
-	@Enumerated(value = EnumType.STRING)
-	private AnimalIdade idade;
-	@Enumerated(value = EnumType.STRING)
+	@Column(nullable = false)
+	private AnimalClassificacaoEtaria classificacaoEtaria;
+	@Column(nullable = false)
 	private AnimalPorte porte;
+	@Column(nullable = false)
 	private Boolean castrado;
+	@Column(nullable = false)
 	private Boolean vacinado;
+	@Column(nullable = true)	
 	private String nome;
+	@Column(nullable = false)
 	private String cep;
+	@OneToOne()
+	@JoinColumn(name = "fk_id_especie")
+	private Especie especie;
 	
-	public String getTipo() {
-		return tipo.getDescricao();
-	}
 	public String getSexo() {
 		return sexo.getDescricao();
 	}
-
-	public String getIdade() {
-		return idade.getDescricao();
+	public String getClassificacaoEtaria() {
+		return classificacaoEtaria.getDescricao();
 	}
 	public String getPorte() {
 		return porte.getDescricao();
 	}
-	
-	
-	
-//	public String validaTipoAnimal(AnimalTipo tipo) {
-//		return tipo.getAnimal();
+//	public AnimalClassificacaoEtaria getClassificacaoEtariaEnum() {
+//		return classificacaoEtaria;
 //	}
-//	public void validaSexoAnimal(String sexo) {
-//		switch(sexo){
-//			case "Macho":
-//				setSexo(AnimalSexo.MACHO);
-//				break;
-//			case "Fêmea":
-//				setSexo(AnimalSexo.FEMEA);
-//				break;
-//			default:
-//				setSexo(AnimalSexo.NAO_SEI);				
-//		}
+//	public AnimalPorte getPorteEnum() {
+//		return porte;
 //	}
-//	public void validaIdadeAnimal(String idade) {
-//		switch(idade){
-//			case "Filhote":
-//				setIdade(AnimalIdade.FILHOTE);
-//				break;
-//			case "Adulto":
-//				setIdade(AnimalIdade.ADULTO);
-//				break;			
-//		}
-//	}	
-//	public void validaPorteAnimal(String porte) {
-//		switch(porte){
-//			case "Pequeno":
-//				setPorte(AnimalPorte.PEQUENO);
-//				break;
-//			case "Médio":
-//				setPorte(AnimalPorte.MEDIO);
-//				break;	
-//			case "Grande":
-//				setPorte(AnimalPorte.GRANDE);
-//				break;		
-//		}
-//	}	
+//	public AnimalSexo getSexoEnum() {
+//		return sexo;
+//	}
 }
