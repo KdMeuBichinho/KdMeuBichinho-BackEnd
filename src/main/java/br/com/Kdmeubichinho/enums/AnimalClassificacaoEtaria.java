@@ -2,19 +2,19 @@ package br.com.Kdmeubichinho.enums;
 
 import java.util.stream.Stream;
 
-public enum AnimalSexo {
-	MACHO("Macho"), FEMEA("Fêmea"), NAO_SEI("Não sei");
+public enum AnimalClassificacaoEtaria {
+	FILHOTE("Filhote"), ADULTO("Adulto");
 	
 	private String descricao;
 	
-	private AnimalSexo(String descricao){
+	private AnimalClassificacaoEtaria(String descricao) {
 		this.descricao = descricao;
 	}
 	public String getDescricao() {
 		return descricao;
 	}
-	public static AnimalSexo of(String descricao) {
-		  return Stream.of(AnimalSexo.values())
+	public static AnimalClassificacaoEtaria of(String descricao) {
+		  return Stream.of(AnimalClassificacaoEtaria.values())
 		    .filter(t -> t.getDescricao().equalsIgnoreCase(descricao))
 		    .findFirst()
 		    .orElseThrow(IllegalArgumentException::new);
