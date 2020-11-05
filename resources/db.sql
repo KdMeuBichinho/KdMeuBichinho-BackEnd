@@ -75,3 +75,4 @@ CREATE TABLE mensagem (
 -- ALTER TABLE `mensagem` ADD CONSTRAINT `fk_id_anuncio` FOREIGN KEY (`fk_id_anuncio`) REFERENCES `anuncio`(`id_anuncio`);
     
 INSERT INTO `kdmeubichinho`.`especie` (`nome`) VALUES ('Cachorro'), ('Gato'), ('Coelho'), ('Hamster');
+INSERT INTO `kdmeubichinho`.`categoria` (`classificacao`) VALUES ('Fugiu de casa'), ('Encontrado na rua'), ('Procurando um lar');
