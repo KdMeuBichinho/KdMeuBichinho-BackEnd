@@ -3,7 +3,7 @@ package br.com.Kdmeubichinho.enums;
 import java.util.stream.Stream;
 
 public enum AnimalSexo {
-	MACHO("Macho"), FEMEA("Fêmea"), NAO_SEI("Não sei");
+	MACHO("Macho"), FEMEA("Fêmea"), NAO_IDENTIFICADO("Não identificado");
 	
 	private String descricao;
 	

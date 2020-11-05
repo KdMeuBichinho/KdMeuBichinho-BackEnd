@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.Kdmeubichinho.converters.AnimalClassificacaoEtariaConverter;
+import br.com.Kdmeubichinho.converters.AnimalPorteConverter;
+import br.com.Kdmeubichinho.converters.AnimalSexoConverter;
 import br.com.Kdmeubichinho.entities.Animal;
 import br.com.Kdmeubichinho.repositories.AnimalRepository;
 
@@ -37,6 +40,11 @@ public class AnimalController {
 	}	
 	@PutMapping("/{idAnimal}")
 	public Animal updateAnimal(@PathVariable Integer idAnimal,@RequestBody Animal dadosAnimal) throws Exception{
+		
+		AnimalPorteConverter porteAnimalConverter = new AnimalPorteConverter();
+		AnimalClassificacaoEtariaConverter classificacaoEtariaAnimalConverter = new AnimalClassificacaoEtariaConverter();
+		AnimalSexoConverter sexoAnimalConverter = new AnimalSexoConverter();
+		
 		Animal myAnimal = animalRepository.findById(idAnimal)
 				.orElseThrow(()-> new IllegalAccessException());
 				
@@ -45,9 +53,9 @@ public class AnimalController {
 		if(!dadosAnimal.getCep().isEmpty()) myAnimal.setCep(dadosAnimal.getCep());
 		myAnimal.setEspecie(dadosAnimal.getEspecie());
 		if(!dadosAnimal.getNome().isEmpty()) myAnimal.setNome(dadosAnimal.getNome());
-//		if(!dadosAnimal.getClassificacaoEtaria().isEmpty()) myAnimal.setClassificacaoEtaria(dadosAnimal.getClassificacaoEtaria());;
-//		if(!dadosAnimal.getPorte().isEmpty()) myAnimal.setPorte(dadosAnimal.getPorte());
-//		if(!dadosAnimal.getSexo().isEmpty()) myAnimal.setSexo(dadosAnimal.getSexo());
+		if(!dadosAnimal.getPorte().isEmpty()) myAnimal.setPorte(porteAnimalConverter.convertToEntityAttribute(dadosAnimal.getPorte()));
+		if(!dadosAnimal.getClassificacaoEtaria().isEmpty()) myAnimal.setClassificacaoEtaria(classificacaoEtariaAnimalConverter.convertToEntityAttribute(dadosAnimal.getClassificacaoEtaria()));;
+		if(!dadosAnimal.getSexo().isEmpty()) myAnimal.setSexo(sexoAnimalConverter.convertToEntityAttribute(dadosAnimal.getSexo()));
 		
 		animalRepository.save(myAnimal);
 		return myAnimal;
