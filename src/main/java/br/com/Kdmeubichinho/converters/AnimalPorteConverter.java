@@ -7,6 +7,7 @@ import br.com.Kdmeubichinho.enums.AnimalPorte;
 
 @Converter(autoApply = true)
 public class AnimalPorteConverter implements AttributeConverter<AnimalPorte, String> {
+
 	
 	@Override
 	public String convertToDatabaseColumn(AnimalPorte porte) {

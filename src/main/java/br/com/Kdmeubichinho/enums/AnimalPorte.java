@@ -2,7 +2,7 @@ package br.com.Kdmeubichinho.enums;
 
 import java.util.stream.Stream;
 
-public enum AnimalPorte {
+public enum AnimalPorte{
 	PEQUENO("Pequeno"), MEDIO("Médio"), GRANDE("Grande");
 	
 	private String descricao;
@@ -14,11 +14,11 @@ public enum AnimalPorte {
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public static AnimalPorte of(String descricao) {
 		  return Stream.of(AnimalPorte.values())
 		    .filter(t -> t.getDescricao().equalsIgnoreCase(descricao))
 		    .findFirst()
 		    .orElseThrow(IllegalArgumentException::new);
-		}
-	
+	}	
 }
