@@ -45,20 +45,20 @@ public class AnimalController {
 		AnimalClassificacaoEtariaConverter classificacaoEtariaAnimalConverter = new AnimalClassificacaoEtariaConverter();
 		AnimalSexoConverter sexoAnimalConverter = new AnimalSexoConverter();
 		
-		Animal myAnimal = animalRepository.findById(idAnimal)
+		Animal meuAnimal = animalRepository.findById(idAnimal)
 				.orElseThrow(()-> new IllegalAccessException());
 				
-		myAnimal.setCastrado(dadosAnimal.getCastrado());
-		myAnimal.setVacinado(dadosAnimal.getVacinado());
-		if(!dadosAnimal.getCep().isEmpty()) myAnimal.setCep(dadosAnimal.getCep());
-		myAnimal.setEspecie(dadosAnimal.getEspecie());
-		if(!dadosAnimal.getNome().isEmpty()) myAnimal.setNome(dadosAnimal.getNome());
-		if(!dadosAnimal.getPorte().isEmpty()) myAnimal.setPorte(porteAnimalConverter.convertToEntityAttribute(dadosAnimal.getPorte()));
-		if(!dadosAnimal.getClassificacaoEtaria().isEmpty()) myAnimal.setClassificacaoEtaria(classificacaoEtariaAnimalConverter.convertToEntityAttribute(dadosAnimal.getClassificacaoEtaria()));;
-		if(!dadosAnimal.getSexo().isEmpty()) myAnimal.setSexo(sexoAnimalConverter.convertToEntityAttribute(dadosAnimal.getSexo()));
+		if(dadosAnimal.getCastrado() != null) meuAnimal.setCastrado(dadosAnimal.getCastrado());
+		if(dadosAnimal.getVacinado() != null) meuAnimal.setVacinado(dadosAnimal.getVacinado());
+		if(dadosAnimal.getEspecie() != null) meuAnimal.setEspecie(dadosAnimal.getEspecie());
+		if(!dadosAnimal.getCep().isEmpty()) meuAnimal.setCep(dadosAnimal.getCep());
+		if(!dadosAnimal.getNome().isEmpty()) meuAnimal.setNome(dadosAnimal.getNome());
+		if(!dadosAnimal.getPorte().isEmpty()) meuAnimal.setPorte(porteAnimalConverter.convertToEntityAttribute(dadosAnimal.getPorte()));
+		if(!dadosAnimal.getClassificacaoEtaria().isEmpty()) meuAnimal.setClassificacaoEtaria(classificacaoEtariaAnimalConverter.convertToEntityAttribute(dadosAnimal.getClassificacaoEtaria()));;
+		if(!dadosAnimal.getSexo().isEmpty()) meuAnimal.setSexo(sexoAnimalConverter.convertToEntityAttribute(dadosAnimal.getSexo()));
 		
-		animalRepository.save(myAnimal);
-		return myAnimal;
+		animalRepository.save(meuAnimal);
+		return meuAnimal;
 	}
 	@DeleteMapping("/{id}")
 	public void deleteAnimal(@PathVariable Integer id) {

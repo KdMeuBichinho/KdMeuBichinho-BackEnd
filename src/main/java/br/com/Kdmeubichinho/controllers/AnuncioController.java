@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.Kdmeubichinho.converters.AnuncioStatusConverter;
 import br.com.Kdmeubichinho.entities.Anuncio;
 import br.com.Kdmeubichinho.repositories.AnuncioRepository;
 
@@ -41,14 +42,18 @@ public class AnuncioController {
 	
 	@PutMapping("/{idAnuncio}")
 	public Anuncio updateAnuncio(@PathVariable Integer idAnuncio,@RequestBody Anuncio dadosAnuncio) throws Exception{
+		
+		AnuncioStatusConverter statusConverter = new AnuncioStatusConverter();
 		Anuncio meuAnuncio = anuncioRepository.findById(idAnuncio)
 				.orElseThrow(()-> new IllegalAccessException());
 		
-		if(!dadosAnuncio.getTipo().isEmpty()) meuAnuncio.setTipo(dadosAnuncio.getTipo());
-		if(!dadosAnuncio.getStatus().isEmpty()) meuAnuncio.setStatus(dadosAnuncio.getStatus());
+
+		if(!dadosAnuncio.getStatus().isEmpty()) meuAnuncio.setStatus(statusConverter.convertToEntityAttribute(dadosAnuncio.getStatus()));
 		if(dadosAnuncio.getData_criacao() != null) meuAnuncio.setData_criacao(dadosAnuncio.getData_criacao());
+		if(dadosAnuncio.getData_encerramento() != null) meuAnuncio.setData_encerramento(dadosAnuncio.getData_encerramento());		
 		if(dadosAnuncio.getId_pessoa() != null) meuAnuncio.setId_pessoa(dadosAnuncio.getId_pessoa());
 		if(dadosAnuncio.getId_animal() != null) meuAnuncio.setId_animal(dadosAnuncio.getId_animal());
+		if(dadosAnuncio.getId_categoria() != null) meuAnuncio.setId_categoria(dadosAnuncio.getId_categoria());
 		
 		anuncioRepository.save(meuAnuncio);
 		return meuAnuncio;
