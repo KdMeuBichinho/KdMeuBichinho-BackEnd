@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -32,7 +33,7 @@ public class Mensagem {
 	private Pessoa id_pessoa;
 	
 	@JoinColumn(name = "fk_id_anuncio")
-	@OneToOne
-	@JsonIgnoreProperties("mensagem")
+	@ManyToOne
+	@JsonIgnoreProperties("mensagens")
 	private Anuncio id_anuncio;
 }

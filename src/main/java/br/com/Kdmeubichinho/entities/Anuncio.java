@@ -44,9 +44,9 @@ public class Anuncio {
 	private Categoria id_categoria;
 	
 	@JoinColumn(name = "fk_id_anuncio")
-	@OneToMany
+	@OneToMany()
 	@JsonIgnoreProperties("id_anuncio")
-	private Set<Mensagem> mensagem;
+	private Set<Mensagem> mensagens;
 	
 	public String getStatus() {
 		return status.getDescricao();
