@@ -20,9 +20,9 @@ public class Foto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_foto;
 	private String caminho;
-	@JoinColumn(name = "fk_id_animal")
 	@ManyToOne
+	@JoinColumn(name = "fk_id_animal")
 	@JsonIgnoreProperties("fotos")
-	private Integer id_animal;
+	private Animal id_animal;
 	
 }

@@ -22,21 +22,21 @@ import br.com.Kdmeubichinho.repositories.FotoRepository;
 public class FotoController {
 	
 	@Autowired
-	private FotoRepository anuncioRepository;
+	private FotoRepository fotoRepository;
 	
 	@GetMapping()
 	public Iterable<Foto> getFoto(){
-		return anuncioRepository.findAll();
+		return fotoRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
 	public Optional<Foto> getById(@PathVariable Integer id){
-		return anuncioRepository.findById(id);
+		return fotoRepository.findById(id);
 	}
 	
 	@PostMapping()
 	public Foto addFoto(@RequestBody Foto anuncio) {
-		anuncioRepository.save(anuncio);
+		fotoRepository.save(anuncio);
 		return anuncio;
 	}
 	
@@ -44,20 +44,20 @@ public class FotoController {
 	public Foto updateFoto(@PathVariable Integer idFoto,@RequestBody Foto dadosFoto) throws Exception{
 		
 		
-		Foto meuFoto = anuncioRepository.findById(idFoto)
+		Foto meuFoto = fotoRepository.findById(idFoto)
 				.orElseThrow(()-> new IllegalAccessException());
 		
 
 		if(!dadosFoto.getCaminho().isEmpty()) meuFoto.setCaminho(dadosFoto.getCaminho());
 		
 		
-		anuncioRepository.save(meuFoto);
+		fotoRepository.save(meuFoto);
 		return meuFoto;
 	}
 	
 	@DeleteMapping("/{id}")
 	public void deleteFoto(@PathVariable Integer id) {
-		anuncioRepository.deleteById(id);
+		fotoRepository.deleteById(id);
 	}
 
 }

@@ -2,6 +2,7 @@ package br.com.Kdmeubichinho.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,7 +53,8 @@ public class Animal {
 	@JoinColumn(name = "fk_id_especie")
 	private Especie especie;
 	
-	@OneToMany(mappedBy = "id_animal")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_id_animal")
 	@JsonIgnoreProperties("id_animal")
 	private Set<Foto> fotos;
 	
