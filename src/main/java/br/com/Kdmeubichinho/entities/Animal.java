@@ -76,4 +76,8 @@ public class Animal {
 //	public AnimalSexo getSexoEnum() {
 //		return sexo;
 //	}
+	public Object getCastrado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
