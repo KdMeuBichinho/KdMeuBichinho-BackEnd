@@ -14,7 +14,7 @@ CREATE TABLE pessoa (
     rua VARCHAR(255) NOT NULL,
     numero_residencial VARCHAR(10) NOT NULL,
     celular VARCHAR(16) NOT NULL,
-    senha VARCHAR(20) NOT NULL,
+    senha VARCHAR(70) NOT NULL,
     autoridade VARCHAR(10) NOT NULL
 )ENGINE = InnoDB;
 
