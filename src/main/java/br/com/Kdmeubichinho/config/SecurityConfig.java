@@ -1,5 +1,5 @@
 package br.com.Kdmeubichinho.config;
 
-public class SecutiryConfig {
+public class SecurityConfig {
 
 }
