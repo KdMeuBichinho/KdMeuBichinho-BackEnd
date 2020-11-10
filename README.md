@@ -49,7 +49,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 # 👷 Como rodar
 ```bash
 # Clonar o repositório
-git clone https://github.com/teteusAraujo/KdMeuBichinho
+git clone https://github.com/KdMeuBichinho/KdMeuBichinho-BackEnd.git
 
 # Entrar noa sua IDE de sua preferência 
 
