@@ -33,6 +33,6 @@ public class Pessoa {
     private String numero_residencial;
     private String celular;
     private String senha;
-    @JsonIgnore
+    //@JsonIgnore
     private String autoridade;
 }
