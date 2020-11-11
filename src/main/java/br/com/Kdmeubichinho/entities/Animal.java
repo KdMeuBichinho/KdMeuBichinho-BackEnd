@@ -33,8 +33,8 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
-	private Integer id_animal;
+	@Column(name = "id_animal", nullable = false)
+	private Integer idAnimal;
 	@Column(nullable = false)
 	private AnimalSexo sexo;
 	@Column(nullable = false)

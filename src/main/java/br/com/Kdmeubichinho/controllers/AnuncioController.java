@@ -1,5 +1,6 @@
 package br.com.Kdmeubichinho.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.converters.AnuncioStatusConverter;
 import br.com.Kdmeubichinho.entities.Anuncio;
+import br.com.Kdmeubichinho.enums.AnimalSexo;
 import br.com.Kdmeubichinho.repositories.AnuncioRepository;
 
 @RestController
@@ -34,6 +37,11 @@ public class AnuncioController {
 	public Optional<Anuncio> getById(@PathVariable Integer id){
 		return anuncioRepository.findById(id);
 	}
+	@GetMapping("/sexolike")
+	public List<Anuncio> getBySexoLike(@RequestParam AnimalSexo sexo) {
+		return anuncioRepository.findByIdAnimal_Sexo(sexo);
+	}
+
 	
 	@PostMapping()
 	public Anuncio addAnuncio(@RequestBody Anuncio anuncio) {
@@ -53,7 +61,7 @@ public class AnuncioController {
 		if(dadosAnuncio.getData_criacao() != null) meuAnuncio.setData_criacao(dadosAnuncio.getData_criacao());
 		if(dadosAnuncio.getData_encerramento() != null) meuAnuncio.setData_encerramento(dadosAnuncio.getData_encerramento());		
 		if(dadosAnuncio.getId_pessoa() != null) meuAnuncio.setId_pessoa(dadosAnuncio.getId_pessoa());
-		if(dadosAnuncio.getId_animal() != null) meuAnuncio.setId_animal(dadosAnuncio.getId_animal());
+		if(dadosAnuncio.getIdAnimal() != null) meuAnuncio.setIdAnimal(dadosAnuncio.getIdAnimal());
 		if(dadosAnuncio.getId_categoria() != null) meuAnuncio.setId_categoria(dadosAnuncio.getId_categoria());
 		
 		anuncioRepository.save(meuAnuncio);
