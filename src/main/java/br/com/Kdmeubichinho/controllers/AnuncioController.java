@@ -19,6 +19,8 @@ import br.com.Kdmeubichinho.converters.AnuncioStatusConverter;
 import br.com.Kdmeubichinho.entities.Anuncio;
 import br.com.Kdmeubichinho.entities.Categoria;
 import br.com.Kdmeubichinho.entities.Especie;
+import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
+import br.com.Kdmeubichinho.enums.AnimalPorte;
 import br.com.Kdmeubichinho.enums.AnimalSexo;
 import br.com.Kdmeubichinho.repositories.AnuncioRepository;
 
@@ -53,6 +55,17 @@ public class AnuncioController {
 	public List<Anuncio> getByCategoriaLike(@RequestParam Categoria categoria) {
 		return anuncioRepository.findByIdCategoria_Categoria(categoria);
 	}
+	
+	@GetMapping("/classificacaoEtarialike")
+	public List<Anuncio> getByClassificacaoEtariaLike(@RequestParam AnimalClassificacaoEtaria classificacaoEtaria) {
+		return anuncioRepository.findByIdAnimal_ClassificacaoEtaria(classificacaoEtaria);
+	}
+	
+	@GetMapping("/portelike")
+	public List<Anuncio> getByPorteLike(@RequestParam AnimalPorte porte) {
+		return anuncioRepository.findByIdAnimal_Porte(porte);
+	}
+	
 	
 	@PostMapping()
 	public Anuncio addAnuncio(@RequestBody Anuncio anuncio) {
