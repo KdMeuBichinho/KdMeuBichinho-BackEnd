@@ -41,7 +41,7 @@ public class Anuncio {
 	private Animal idAnimal;
 	@OneToOne()
 	@JoinColumn(name = "fk_id_categoria")
-	private Categoria id_categoria;
+	private Categoria idCategoria;
 	
 	@JoinColumn(name = "fk_id_anuncio")
 	@OneToMany()

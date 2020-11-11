@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.converters.AnuncioStatusConverter;
 import br.com.Kdmeubichinho.entities.Anuncio;
+import br.com.Kdmeubichinho.entities.Categoria;
+import br.com.Kdmeubichinho.entities.Especie;
 import br.com.Kdmeubichinho.enums.AnimalSexo;
 import br.com.Kdmeubichinho.repositories.AnuncioRepository;
 
@@ -42,6 +44,15 @@ public class AnuncioController {
 		return anuncioRepository.findByIdAnimal_Sexo(sexo);
 	}
 
+	@GetMapping("/especielike")
+	public List<Anuncio> getByEspecieLike(@RequestParam Especie especie) {
+		return anuncioRepository.findByEspecie_Especie(especie);
+	}
+
+	@GetMapping("/categorialike")
+	public List<Anuncio> getByCategoriaLike(@RequestParam Categoria categoria) {
+		return anuncioRepository.findByIdCategoria_Categoria(categoria);
+	}
 	
 	@PostMapping()
 	public Anuncio addAnuncio(@RequestBody Anuncio anuncio) {
@@ -62,7 +73,7 @@ public class AnuncioController {
 		if(dadosAnuncio.getData_encerramento() != null) meuAnuncio.setData_encerramento(dadosAnuncio.getData_encerramento());		
 		if(dadosAnuncio.getId_pessoa() != null) meuAnuncio.setId_pessoa(dadosAnuncio.getId_pessoa());
 		if(dadosAnuncio.getIdAnimal() != null) meuAnuncio.setIdAnimal(dadosAnuncio.getIdAnimal());
-		if(dadosAnuncio.getId_categoria() != null) meuAnuncio.setId_categoria(dadosAnuncio.getId_categoria());
+		if(dadosAnuncio.getIdCategoria() != null) meuAnuncio.setIdCategoria(dadosAnuncio.getIdCategoria());
 		
 		anuncioRepository.save(meuAnuncio);
 		return meuAnuncio;
