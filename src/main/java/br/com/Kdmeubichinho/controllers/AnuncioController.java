@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.converters.AnuncioStatusConverter;
 import br.com.Kdmeubichinho.entities.Anuncio;
-import br.com.Kdmeubichinho.entities.Categoria;
-import br.com.Kdmeubichinho.entities.Especie;
 import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
 import br.com.Kdmeubichinho.enums.AnimalPorte;
 import br.com.Kdmeubichinho.enums.AnimalSexo;
@@ -36,43 +34,35 @@ public class AnuncioController {
 	public Iterable<Anuncio> getAnuncio(Pageable pageable){
 		return anuncioRepository.findAll(pageable);
 	}
-	
 	@GetMapping("/{id}")
 	public Optional<Anuncio> getById(@PathVariable Integer id){
 		return anuncioRepository.findById(id);
 	}
-	@GetMapping("/sexolike")
-	public List<Anuncio> getBySexoLike(@RequestParam AnimalSexo sexo) {
+	@GetMapping("/sexo")
+	public List<Anuncio> getBySexo(@RequestParam AnimalSexo sexo) {
 		return anuncioRepository.findByIdAnimal_Sexo(sexo);
 	}
-
-	@GetMapping("/especielike")
-	public List<Anuncio> getByEspecieLike(@RequestParam Especie especie) {
-		return anuncioRepository.findByEspecie_Especie(especie);
+	@GetMapping("/especie")
+	public List<Anuncio> getByEspecie(@RequestParam Integer id) {
+		return anuncioRepository.findByIdAnimal_Especie_IdEspecie(id);
 	}
-
-	@GetMapping("/categorialike")
-	public List<Anuncio> getByCategoriaLike(@RequestParam Categoria categoria) {
-		return anuncioRepository.findByIdCategoria_Categoria(categoria);
+	@GetMapping("/categoria")
+	public List<Anuncio> getByCategoria(@RequestParam Integer id) {
+		return anuncioRepository.findByIdCategoria_IdCategoria(id);
 	}
-	
-	@GetMapping("/classificacaoEtarialike")
-	public List<Anuncio> getByClassificacaoEtariaLike(@RequestParam AnimalClassificacaoEtaria classificacaoEtaria) {
+	@GetMapping("/classificacaoEtaria")
+	public List<Anuncio> getByClassificacaoEtaria(@RequestParam AnimalClassificacaoEtaria classificacaoEtaria) {
 		return anuncioRepository.findByIdAnimal_ClassificacaoEtaria(classificacaoEtaria);
 	}
-	
-	@GetMapping("/portelike")
-	public List<Anuncio> getByPorteLike(@RequestParam AnimalPorte porte) {
+	@GetMapping("/porte")
+	public List<Anuncio> getByPorte(@RequestParam AnimalPorte porte) {
 		return anuncioRepository.findByIdAnimal_Porte(porte);
 	}
-	
-	
 	@PostMapping()
 	public Anuncio addAnuncio(@RequestBody Anuncio anuncio) {
 		anuncioRepository.save(anuncio);
 		return anuncio;
 	}
-	
 	@PutMapping("/{idAnuncio}")
 	public Anuncio updateAnuncio(@PathVariable Integer idAnuncio,@RequestBody Anuncio dadosAnuncio) throws Exception{
 		
