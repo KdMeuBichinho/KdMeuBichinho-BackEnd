@@ -38,7 +38,7 @@ public class Anuncio {
 	private Pessoa id_pessoa;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_id_animal")
-	private Animal id_animal;
+	private Animal idAnimal;
 	@OneToOne()
 	@JoinColumn(name = "fk_id_categoria")
 	private Categoria id_categoria;
