@@ -1,9 +1,9 @@
 package br.com.Kdmeubichinho.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +30,9 @@ public class AnuncioController {
 	@Autowired
 	private AnuncioRepository anuncioRepository;
 	
+	
+	
+
 	@GetMapping()
 	public Iterable<Anuncio> getAnuncio(Pageable pageable){
 		return anuncioRepository.findAll(pageable);
@@ -39,24 +42,24 @@ public class AnuncioController {
 		return anuncioRepository.findById(id);
 	}
 	@GetMapping("/sexo")
-	public List<Anuncio> getBySexo(@RequestParam AnimalSexo sexo) {
-		return anuncioRepository.findByIdAnimal_Sexo(sexo);
+	public Page<Anuncio> getBySexo(@RequestParam AnimalSexo sexo, Pageable pageable) {
+		return anuncioRepository.findByIdAnimal_Sexo(sexo, pageable);
 	}
 	@GetMapping("/especie")
-	public List<Anuncio> getByEspecie(@RequestParam Integer id) {
-		return anuncioRepository.findByIdAnimal_Especie_IdEspecie(id);
+	public Page<Anuncio> getByEspecie(@RequestParam Integer id, Pageable pageable) {
+		return anuncioRepository.findByIdAnimal_Especie_IdEspecie(id, pageable);
 	}
 	@GetMapping("/categoria")
-	public List<Anuncio> getByCategoria(@RequestParam Integer id) {
-		return anuncioRepository.findByIdCategoria_IdCategoria(id);
+	public Page<Anuncio> getByCategoria(@RequestParam Integer id, Pageable pageable) {
+		return anuncioRepository.findByIdCategoria_IdCategoria(id, pageable);
 	}
-	@GetMapping("/classificacaoEtaria")
-	public List<Anuncio> getByClassificacaoEtaria(@RequestParam AnimalClassificacaoEtaria classificacaoEtaria) {
-		return anuncioRepository.findByIdAnimal_ClassificacaoEtaria(classificacaoEtaria);
+	@GetMapping("/classificacaoetaria")
+	public Page<Anuncio> getByClassificacaoEtaria(@RequestParam AnimalClassificacaoEtaria classificacaoEtaria, Pageable pageable) {
+		return anuncioRepository.findByIdAnimal_ClassificacaoEtaria(classificacaoEtaria, pageable);
 	}
 	@GetMapping("/porte")
-	public List<Anuncio> getByPorte(@RequestParam AnimalPorte porte) {
-		return anuncioRepository.findByIdAnimal_Porte(porte);
+	public Page<Anuncio> getByPorte(@RequestParam AnimalPorte porte, Pageable pageable) {
+		return anuncioRepository.findByIdAnimal_Porte(porte, pageable);
 	}
 	@PostMapping()
 	public Anuncio addAnuncio(@RequestBody Anuncio anuncio) {
