@@ -1,7 +1,5 @@
 package br.com.Kdmeubichinho.entities;
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
 import br.com.Kdmeubichinho.enums.AnimalPorte;
@@ -53,10 +48,9 @@ public class Animal {
 	@JoinColumn(name = "fk_id_especie")
 	private Especie especie;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_id_animal")
-	@JsonIgnoreProperties("id_animal")
-	private Set<Foto> fotos;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_id_foto")
+	private Foto fotos;
 	
 	public String getSexo() {
 		return sexo.getDescricao();
