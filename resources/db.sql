@@ -28,7 +28,9 @@ CREATE TABLE animal (
     nome VARCHAR(120),
     cep VARCHAR(10) NOT NULL,
     fk_id_especie INT NOT NULL,
-    FOREIGN KEY (`fk_id_especie`) REFERENCES `especie`(`id_especie`)
+    fk_id_foto INT NOT NULL,
+    FOREIGN KEY (`fk_id_especie`) REFERENCES `especie`(`id_especie`),
+    FOREIGN KEY (`fk_id_foto`) REFERENCES `foto`(`id_foto`)
 )ENGINE = InnoDB;
 
 CREATE TABLE categoria(
@@ -51,9 +53,7 @@ CREATE TABLE anuncio (
 
 CREATE TABLE foto (
     id_foto INT PRIMARY KEY AUTO_INCREMENT,
-    caminho VARCHAR(255),
-    fk_id_animal INT,
-    FOREIGN KEY (`fk_id_animal`) REFERENCES `animal`(`id_animal`)
+    caminho VARCHAR(255)
 )ENGINE = InnoDB;
 
 CREATE TABLE mensagem (
