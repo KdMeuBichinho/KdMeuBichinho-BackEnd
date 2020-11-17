@@ -6,6 +6,11 @@ CREATE TABLE especie(
     nome VARCHAR(20) NOT NULL UNIQUE
 ) ENGINE = InnoDB;
 
+CREATE TABLE foto (
+    id_foto INT PRIMARY KEY AUTO_INCREMENT,
+    caminho VARCHAR(255)
+)ENGINE = InnoDB;
+
 CREATE TABLE pessoa (
     id_pessoa INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(120) NOT NULL,
@@ -15,7 +20,7 @@ CREATE TABLE pessoa (
     numero_residencial VARCHAR(10) NOT NULL,
     celular VARCHAR(16) NOT NULL,
     senha VARCHAR(70) NOT NULL,
-    autoridade VARCHAR(10) NOT NULL
+    admin BOOL NOT NULL DEFAULT false
 )ENGINE = InnoDB;
 
 CREATE TABLE animal (
@@ -49,11 +54,6 @@ CREATE TABLE anuncio (
     FOREIGN KEY (`fk_id_pessoa`) REFERENCES `pessoa`(`id_pessoa`),
 	FOREIGN KEY (`fk_id_animal`) REFERENCES `animal`(`id_animal`),
 	FOREIGN KEY (`fk_id_categoria`) REFERENCES `categoria`(`id_categoria`)
-)ENGINE = InnoDB;
-
-CREATE TABLE foto (
-    id_foto INT PRIMARY KEY AUTO_INCREMENT,
-    caminho VARCHAR(255)
 )ENGINE = InnoDB;
 
 CREATE TABLE mensagem (

@@ -1,5 +1,6 @@
 package br.com.Kdmeubichinho.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Entity
 @Builder
@@ -18,18 +20,33 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Accessors(chain = true)
 @Table(name = "pessoa")
+
 public class Pessoa {
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_pessoa;
+    @Column(name = "id_pessoa")
+    private Integer idPessoa;
     private String nome;
     private String email;
     private String cep;
     private String rua;
-    private String numero_residencial;
+    @Column(name = "numero_residencial")
+    private String numeroResidencial;
     private String celular;
     private String senha;
-    //@JsonIgnore
-    private String autoridade;
+    private boolean admin;
+    
+    public Pessoa(Integer idPessoa, String nome, String email, String cep, String rua, String numeroResidencial,
+			String celular, String senha) {
+		this.idPessoa = idPessoa;
+		this.nome = nome;
+		this.email = email;
+		this.cep = cep;
+		this.rua = rua;
+		this.numeroResidencial = numeroResidencial;
+		this.celular = celular;
+		this.senha = senha;
+	}
 }

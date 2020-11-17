@@ -5,9 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.Kdmeubichinho.dto.EspecieRequestDTO;
 import br.com.Kdmeubichinho.entities.Especie;
 import br.com.Kdmeubichinho.repositories.EspecieRepository;
 
@@ -26,5 +29,10 @@ public class EspecieController {
 	@GetMapping("/{id}")
 	public Optional<Especie> getEspecieById(@PathVariable Integer id){
 		return especieRepository.findById(id);
+	}
+	@PutMapping()
+	public EspecieRequestDTO addEspecie(@RequestBody EspecieRequestDTO especieRequestDTO) {
+		especieRepository.save(especieRequestDTO.build());
+		return especieRequestDTO;
 	}
 }

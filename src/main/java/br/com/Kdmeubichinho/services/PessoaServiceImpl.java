@@ -25,7 +25,6 @@ public class PessoaServiceImpl implements UserDetailsService{
 	
 	@Transactional
 	public Pessoa salvar(Pessoa pessoa) {
-		
 		return repository.save(pessoa);
 	}
 	
@@ -45,7 +44,7 @@ public class PessoaServiceImpl implements UserDetailsService{
 		Pessoa pessoa = repository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado na base de dados"));
 	
-		String[] roles = pessoa.getAutoridade().equals("ADMIN") ?
+		String[] roles = pessoa.isAdmin() ?
 				new String[]{"ADMIN", "USER"} : new String[] {"USER"};
 				
 		return User
