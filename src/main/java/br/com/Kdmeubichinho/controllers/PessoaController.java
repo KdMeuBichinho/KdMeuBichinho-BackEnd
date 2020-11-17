@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.Kdmeubichinho.dto.CredenciaisDTO;
+import br.com.Kdmeubichinho.dto.PessoaDTO;
 import br.com.Kdmeubichinho.dto.TokenDTO;
 import br.com.Kdmeubichinho.entities.Pessoa;
 import br.com.Kdmeubichinho.exceptions.SenhaInvalidaException;
@@ -55,10 +56,10 @@ public class PessoaController {
 	
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pessoa salvar( @RequestBody Pessoa pessoa ){
+    public Pessoa salvar( @RequestBody PessoaDTO pessoa ){
         String senhaCriptografada = passwordEncoder.encode(pessoa.getSenha());
         pessoa.setSenha(senhaCriptografada);
-        return pessoaService.salvar(pessoa);
+        return pessoaService.salvar(pessoa.build());
     }
     @PostMapping("/auth")
     public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais){
@@ -85,7 +86,7 @@ public class PessoaController {
 		if(!dadosPessoa.getCelular().isEmpty()) myPessoa.setCelular(dadosPessoa.getCelular());
 		if(!dadosPessoa.getCep().isEmpty()) myPessoa.setCep(dadosPessoa.getCep());
 		if(!dadosPessoa.getRua().isEmpty()) myPessoa.setRua(dadosPessoa.getRua());
-		if(!dadosPessoa.getNumero_residencial().isEmpty()) myPessoa.setNumero_residencial(dadosPessoa.getNumero_residencial());
+		if(!dadosPessoa.getNumeroResidencial().isEmpty()) myPessoa.setNumeroResidencial(dadosPessoa.getNumeroResidencial());
 		if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
 		
 		pessoaRepository.save(myPessoa);

@@ -14,21 +14,25 @@ import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
 import br.com.Kdmeubichinho.enums.AnimalPorte;
 import br.com.Kdmeubichinho.enums.AnimalSexo;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
+@Data
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 @Table(name = "animal", schema = "kdmeubichinho")
 public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_animal", nullable = false)
+	@Column(name = "id_animal")
 	private Integer idAnimal;
 	@Column(nullable = false)
 	private AnimalSexo sexo;
@@ -60,6 +64,18 @@ public class Animal {
 	}
 	public String getPorte() {
 		return porte.getDescricao();
+	}
+	public Animal(AnimalSexo sexo, AnimalClassificacaoEtaria classificacaoEtaria, AnimalPorte porte,
+			Boolean castrado, Boolean vacinado, String nome, String cep, Especie especie, Foto fotos) {
+		this.sexo = sexo;
+		this.classificacaoEtaria = classificacaoEtaria;
+		this.porte = porte;
+		this.castrado = castrado;
+		this.vacinado = vacinado;
+		this.nome = nome;
+		this.cep = cep;
+		this.especie = especie;
+		this.fotos = fotos;
 	}
 //	public AnimalClassificacaoEtaria getClassificacaoEtariaEnum() {
 //		return classificacaoEtaria;
