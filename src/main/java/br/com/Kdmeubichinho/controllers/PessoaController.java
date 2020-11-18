@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/pessoa")
 @RequiredArgsConstructor
+@CrossOrigin
 public class PessoaController {
 	
 	private final PessoaServiceImpl pessoaService;
@@ -57,6 +59,7 @@ public class PessoaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pessoa salvar( @RequestBody PessoaDTO pessoa ){
+    	System.out.println("Controller Entrou");
         String senhaCriptografada = passwordEncoder.encode(pessoa.getSenha());
         pessoa.setSenha(senhaCriptografada);
         return pessoaService.salvar(pessoa.build());
@@ -85,7 +88,13 @@ public class PessoaController {
 		if(!dadosPessoa.getNome().isEmpty()) myPessoa.setNome(dadosPessoa.getNome());
 		if(!dadosPessoa.getCelular().isEmpty()) myPessoa.setCelular(dadosPessoa.getCelular());
 		if(!dadosPessoa.getCep().isEmpty()) myPessoa.setCep(dadosPessoa.getCep());
-		if(!dadosPessoa.getRua().isEmpty()) myPessoa.setRua(dadosPessoa.getRua());
+		if(!dadosPessoa.getLogradouro().isEmpty()) myPessoa.setLogradouro(dadosPessoa.getLogradouro());
+		if(!dadosPessoa.getComplemento().isEmpty()) myPessoa.setComplemento(dadosPessoa.getComplemento());
+		if(!dadosPessoa.getBairro().isEmpty()) myPessoa.setBairro(dadosPessoa.getBairro());
+		if(!dadosPessoa.getLocalidade().isEmpty()) myPessoa.setLocalidade(dadosPessoa.getLocalidade());
+		if(!dadosPessoa.getUf().isEmpty()) myPessoa.setUf(dadosPessoa.getUf());
+		if(!dadosPessoa.getIbge().isEmpty()) myPessoa.setIbge(dadosPessoa.getIbge());
+		if(!dadosPessoa.getDdd().isEmpty()) myPessoa.setDdd(dadosPessoa.getDdd());
 		if(!dadosPessoa.getNumeroResidencial().isEmpty()) myPessoa.setNumeroResidencial(dadosPessoa.getNumeroResidencial());
 		if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
 		
