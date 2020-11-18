@@ -31,20 +31,32 @@ public class Pessoa {
     private String nome;
     private String email;
     private String cep;
-    private String rua;
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+    private String ibge;
+    private String ddd;
     @Column(name = "numero_residencial")
     private String numeroResidencial;
     private String celular;
     private String senha;
     private boolean admin;
     
-    public Pessoa(Integer idPessoa, String nome, String email, String cep, String rua, String numeroResidencial,
-			String celular, String senha) {
+    public Pessoa(Integer idPessoa, String nome, String email, String cep, String logradouro, String complemento, String bairro, 
+    		String localidade, String uf, String ibge, String ddd, String numeroResidencial, String celular, String senha) {
 		this.idPessoa = idPessoa;
 		this.nome = nome;
 		this.email = email;
 		this.cep = cep;
-		this.rua = rua;
+		this.logradouro = logradouro;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.localidade = localidade;
+		this.uf = uf;
+		this.ibge = ibge;
+		this.ddd = ddd;
 		this.numeroResidencial = numeroResidencial;
 		this.celular = celular;
 		this.senha = senha;
