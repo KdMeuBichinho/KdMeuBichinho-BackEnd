@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ import br.com.Kdmeubichinho.specification.AnuncioSpecification;
 
 @RestController
 @RequestMapping(path = "/anuncio")
-
+@CrossOrigin
 public class AnuncioController{
 	
 	@Autowired
@@ -38,7 +39,6 @@ public class AnuncioController{
 				.and(status == null ? null : AnuncioSpecification.statusFilter(status))
 				.and(sexo == null ? null : AnuncioSpecification.AnimalSexoFilter(sexo))
 				.and(idCategoria == null ? null : AnuncioSpecification.AnuncioCategoriaFilter(idCategoria))
-				.and(idEspecie == null ? null : AnuncioSpecification.AnimalEspecieFilter(idEspecie))
 				.and(idEspecie == null ? null : AnuncioSpecification.AnimalEspecieFilter(idEspecie))
 				.and(classificacaoEtaria == null ? null : AnuncioSpecification.AnimalClassificacaoEtariaFilter(classificacaoEtaria))
 				.and(vacinado == null ? null : AnuncioSpecification.AnimalVacinadoFilter(vacinado))
