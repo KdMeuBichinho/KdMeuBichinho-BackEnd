@@ -71,9 +71,9 @@ public class PessoaController {
             Pessoa pessoa = Pessoa.builder()
                     .email(credenciais.getEmail())
                     .senha(credenciais.getSenha()).build();
-            UserDetails pessoaAutenticado = pessoaService.autenticar(pessoa);
+            		pessoaService.autenticar(pessoa);
             String token = jwtService.gerarToken(pessoa);
-            return new TokenDTO(pessoa.getEmail(), token);
+            return new TokenDTO(pessoa.getEmail(), token, "200");
         } catch (UsernameNotFoundException | SenhaInvalidaException e ){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
