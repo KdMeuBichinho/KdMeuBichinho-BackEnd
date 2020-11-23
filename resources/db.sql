@@ -59,7 +59,7 @@ CREATE TABLE categoria(
 
 CREATE TABLE anuncio (
     id_anuncio INT PRIMARY KEY AUTO_INCREMENT,
-    status_anuncio ENUM("Ativo", "Inativo") DEFAULT "Ativo",
+    status_anuncio ENUM("Ativo", "Inativo"),
     data_criacao DATE NOT NULL,
     data_encerramento DATE,
     fk_id_pessoa INT NOT NULL,

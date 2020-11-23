@@ -48,6 +48,13 @@ public class Animal {
 	private String nome;
 	@Column(nullable = false)
 	private String cep;
+	private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+    private String ibge;
+    private String ddd;
 	@OneToOne()
 	@JoinColumn(name = "fk_id_especie")
 	private Especie especie;
@@ -65,18 +72,18 @@ public class Animal {
 	public String getPorte() {
 		return porte.getDescricao();
 	}
-	public Animal(AnimalSexo sexo, AnimalClassificacaoEtaria classificacaoEtaria, AnimalPorte porte,
-			Boolean castrado, Boolean vacinado, String nome, String cep, Especie especie, Foto fotos) {
-		this.sexo = sexo;
-		this.classificacaoEtaria = classificacaoEtaria;
-		this.porte = porte;
-		this.castrado = castrado;
-		this.vacinado = vacinado;
-		this.nome = nome;
-		this.cep = cep;
-		this.especie = especie;
-		this.fotos = fotos;
-	}
+//	public Animal(AnimalSexo sexo, AnimalClassificacaoEtaria classificacaoEtaria, AnimalPorte porte,
+//			Boolean castrado, Boolean vacinado, String nome, String cep, Especie especie, Foto fotos) {
+//		this.sexo = sexo;
+//		this.classificacaoEtaria = classificacaoEtaria;
+//		this.porte = porte;
+//		this.castrado = castrado;
+//		this.vacinado = vacinado;
+//		this.nome = nome;
+//		this.cep = cep;
+//		this.especie = especie;
+//		this.fotos = fotos;
+//	}
 //	public AnimalClassificacaoEtaria getClassificacaoEtariaEnum() {
 //		return classificacaoEtaria;
 //	}
