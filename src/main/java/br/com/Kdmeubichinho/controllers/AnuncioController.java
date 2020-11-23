@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.converters.AnuncioStatusConverter;
 import br.com.Kdmeubichinho.entities.Anuncio;
+import br.com.Kdmeubichinho.entities.Pessoa;
 import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
 import br.com.Kdmeubichinho.enums.AnimalPorte;
 import br.com.Kdmeubichinho.enums.AnimalSexo;
 import br.com.Kdmeubichinho.enums.AnuncioStatus;
 import br.com.Kdmeubichinho.repositories.AnuncioRepository;
+import br.com.Kdmeubichinho.repositories.PessoaRepository;
 import br.com.Kdmeubichinho.specification.AnuncioSpecification;
 
 @RestController
@@ -31,6 +33,11 @@ public class AnuncioController{
 	
 	@Autowired
 	private AnuncioRepository anuncioRepository;
+	
+	@Autowired
+	private PessoaRepository pessoaRepository;
+
+	private AnuncioStatus ATIVO = AnuncioStatus.ATIVO;
 		
 	@GetMapping("/busca")
 	public Iterable<Anuncio> getAnuncioFiltrado(Pageable pageable, String cep, AnuncioStatus status, AnimalSexo sexo, AnimalPorte porte, AnimalClassificacaoEtaria classificacaoEtaria, Integer idCategoria, Integer idEspecie, Boolean castrado, Boolean vacinado){
@@ -72,6 +79,16 @@ public class AnuncioController{
 //	}
 	@PostMapping()
 	public Anuncio addAnuncio(@RequestBody Anuncio anuncio) {
+		
+		Optional<Pessoa> pessoa = pessoaRepository.findByEmail(anuncio.getIdPessoa().getEmail());
+		if(pessoa.isPresent()) {
+			Integer pessoaId = pessoa.get().getIdPessoa();
+			anuncio.getIdPessoa().setIdPessoa(pessoaId);
+		}
+		
+		anuncio.setStatus(ATIVO);
+
+		
 		anuncioRepository.save(anuncio);
 		return anuncio;
 	}

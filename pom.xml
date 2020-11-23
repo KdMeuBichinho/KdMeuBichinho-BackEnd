@@ -15,7 +15,7 @@
 	<description>Projeto integrador desenvolvido por bolsistas durante o curso de Desenvolvimento Web Full Stack Java oferecido pela Digital House em parceria com a Universidade Santander.</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
