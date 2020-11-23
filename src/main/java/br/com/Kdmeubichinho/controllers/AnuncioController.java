@@ -85,7 +85,9 @@ public class AnuncioController{
 			Integer pessoaId = pessoa.get().getIdPessoa();
 			anuncio.getIdPessoa().setIdPessoa(pessoaId);
 		}
-		
+		if(anuncio.getIdAnimal().getNome().isEmpty()) {
+			anuncio.getIdAnimal().setNome("Desconhecido");
+		}
 		anuncio.setStatus(ATIVO);
 
 		
