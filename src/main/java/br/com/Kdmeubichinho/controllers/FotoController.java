@@ -42,7 +42,7 @@ public class FotoController {
 	@PostMapping()
 	public String saveImg(@RequestParam("image") MultipartFile file) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		String uploadDir = "files";
+		String uploadDir = "target/classes/static";
 		
 		Date date = new Date();
 		String filePrefix = date.getTime() + "-";
@@ -53,7 +53,8 @@ public class FotoController {
 		} catch(IOException e) {
 			return ("Não foi possível salvar o arquivo: " + fileName);
 		}
-		return uploadDir + "/" + fileName;
+//		return uploadDir + "/" + fileName;
+		return fileName;
 	}
 	
 //	@PostMapping()
