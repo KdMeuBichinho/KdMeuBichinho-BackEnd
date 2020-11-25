@@ -2,6 +2,7 @@ package br.com.Kdmeubichinho.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,18 +23,19 @@ public class Mensagem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_mensagem;
-	
-	private Date data_mensagem;
+	@Column(name = "id_mensagem")
+	private Integer idMensagem;
+	@Column(name = "data_mensagem")
+	private Date dataMensagem;
 	
 	private String mensagem;
 	
 	@JoinColumn(name = "fk_id_pessoa")
 	@OneToOne
-	private Pessoa id_pessoa;
+	private Pessoa idPessoa;
 	
 	@JoinColumn(name = "fk_id_anuncio")
 	@ManyToOne
 	@JsonIgnoreProperties("mensagens")
-	private Anuncio id_anuncio;
+	private Anuncio idAnuncio;
 }
