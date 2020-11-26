@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -65,7 +65,7 @@ public class PessoaController {
         return pessoaService.salvar(pessoa.build());
     }
     @PostMapping("/auth")
-    public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais){
+    public ResponseEntity<TokenDTO> autenticar(@RequestBody CredenciaisDTO credenciais){
         try{
         	System.out.println(credenciais);
             Pessoa pessoa = Pessoa.builder()
@@ -73,18 +73,20 @@ public class PessoaController {
                     .senha(credenciais.getSenha()).build();
             		pessoaService.autenticar(pessoa);
             String token = jwtService.gerarToken(pessoa);
-            return new TokenDTO(pessoa.getEmail(), token, "200");
+            TokenDTO tokenDto =  new TokenDTO(pessoa.getEmail(), token);
+            return new ResponseEntity<TokenDTO>(tokenDto, HttpStatus.OK);
+            
         } catch (UsernameNotFoundException | SenhaInvalidaException e ){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
     
-	@PutMapping("/{idPessoa}")
-	public Pessoa updatePessoa(@PathVariable Integer idPessoa,@RequestBody Pessoa dadosPessoa) throws Exception{
-		Pessoa myPessoa = pessoaRepository.findById(idPessoa)
+	@PutMapping("/{emailPessoa}")
+	public Pessoa updatePessoa(@PathVariable String emailPessoa,@RequestBody PessoaDTO dadosPessoa) throws Exception{
+		Pessoa myPessoa = pessoaRepository.findByEmail(emailPessoa)
 				.orElseThrow(()-> new IllegalAccessException());
 		
-		if(!dadosPessoa.getEmail().isEmpty()) myPessoa.setEmail(dadosPessoa.getEmail());
+		//if(!dadosPessoa.getEmail().isEmpty()) myPessoa.setEmail(dadosPessoa.getEmail());
 		if(!dadosPessoa.getNome().isEmpty()) myPessoa.setNome(dadosPessoa.getNome());
 		if(!dadosPessoa.getCelular().isEmpty()) myPessoa.setCelular(dadosPessoa.getCelular());
 		if(!dadosPessoa.getCep().isEmpty()) myPessoa.setCep(dadosPessoa.getCep());
@@ -96,7 +98,7 @@ public class PessoaController {
 		if(!dadosPessoa.getIbge().isEmpty()) myPessoa.setIbge(dadosPessoa.getIbge());
 		if(!dadosPessoa.getDdd().isEmpty()) myPessoa.setDdd(dadosPessoa.getDdd());
 		if(!dadosPessoa.getNumeroResidencial().isEmpty()) myPessoa.setNumeroResidencial(dadosPessoa.getNumeroResidencial());
-		if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
+		//if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
 		
 		pessoaRepository.save(myPessoa);
 		return myPessoa;
