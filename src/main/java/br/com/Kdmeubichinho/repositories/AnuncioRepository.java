@@ -19,6 +19,7 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer>, JpaS
 	Page<Anuncio> findByIdAnimal_ClassificacaoEtaria(AnimalClassificacaoEtaria classificacaoEtaria, Pageable pageable);
 	Page<Anuncio> findByIdAnimal_Porte(AnimalPorte porte, Pageable pageable);
 	List<Anuncio> findByIdAnimal_SexoAndIdAnimal_Porte(AnimalSexo sexo, AnimalPorte porte);
+	Page<Anuncio> findByidPessoa_Email(String email, Pageable pageable);
 	
 //	@Query(value = "select a from Anuncio a where nome like %:nome%")
 //	List<Anuncio> encontrarAnuncio(String nome);

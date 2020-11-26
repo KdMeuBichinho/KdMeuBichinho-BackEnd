@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class TokenDTO {
 	private String email;
 	private String token;
-	private String status;
+	//private String status;
 }
