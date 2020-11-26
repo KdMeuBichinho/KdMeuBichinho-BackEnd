@@ -98,6 +98,7 @@ public class PessoaController {
 		if(!dadosPessoa.getIbge().isEmpty()) myPessoa.setIbge(dadosPessoa.getIbge());
 		if(!dadosPessoa.getDdd().isEmpty()) myPessoa.setDdd(dadosPessoa.getDdd());
 		if(!dadosPessoa.getNumeroResidencial().isEmpty()) myPessoa.setNumeroResidencial(dadosPessoa.getNumeroResidencial());
+		myPessoa.setComplemento(dadosPessoa.getComplemento());
 		//if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
 		
 		pessoaRepository.save(myPessoa);
