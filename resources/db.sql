@@ -60,8 +60,8 @@ CREATE TABLE categoria(
 CREATE TABLE anuncio (
     id_anuncio INT PRIMARY KEY AUTO_INCREMENT,
     status_anuncio ENUM("Ativo", "Inativo"),
-    data_criacao DATE NOT NULL,
-    data_encerramento DATE,
+    data_criacao DATETIME NOT NULL,
+    data_encerramento DATETIME,
     fk_id_pessoa INT NOT NULL,
     fk_id_animal INT NOT NULL,
     fk_id_categoria INT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE anuncio (
 
 CREATE TABLE mensagem (
     id_mensagem INT PRIMARY KEY AUTO_INCREMENT,
-    data_mensagem DATE NOT NULL,
+    data_mensagem DATETIME NOT NULL,
     mensagem VARCHAR(255),
     fk_id_pessoa INT,
     fk_id_anuncio INT,

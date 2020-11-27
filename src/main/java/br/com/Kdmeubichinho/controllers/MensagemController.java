@@ -40,13 +40,15 @@ public class MensagemController {
 	}
 	
 	@PostMapping()
-	public Mensagem addMensagem(@RequestBody Mensagem mensagem) {
+	public Mensagem addMensagem(@RequestBody Mensagem mensagem){
 		
 		Optional<Pessoa> pessoa = pessoaRepository.findByEmail(mensagem.getIdPessoa().getEmail());
 		if(pessoa.isPresent()) {
 			Integer pessoaId = pessoa.get().getIdPessoa();
 			mensagem.getIdPessoa().setIdPessoa(pessoaId);
 		}
+		
+		System.out.println("IMPRIMINDO A DATA QUE ESTA VINDO" + mensagem.getDataMensagem());
 		
 		mensagemRepository.save(mensagem);
 		return mensagem;
