@@ -1,5 +1,7 @@
 package br.com.Kdmeubichinho.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,20 +105,44 @@ public class AnuncioController{
 		anuncioRepository.save(anuncio);
 		return anuncio;
 	}
-	@PutMapping("/{idAnuncio}")
-	public Anuncio updateAnuncio(@PathVariable Integer idAnuncio,@RequestBody Anuncio dadosAnuncio) throws Exception{
+//	@PutMapping("/{idAnuncio}")
+//	public Anuncio updateAnuncio(@PathVariable Integer idAnuncio,@RequestBody Anuncio dadosAnuncio) throws Exception{
+//		
+//		AnuncioStatusConverter statusConverter = new AnuncioStatusConverter();
+//		Anuncio meuAnuncio = anuncioRepository.findById(idAnuncio)
+//				.orElseThrow(()-> new IllegalAccessException());
+//		
+//
+//		if(!dadosAnuncio.getStatus().isEmpty()) meuAnuncio.setStatus(statusConverter.convertToEntityAttribute(dadosAnuncio.getStatus()));
+//		if(dadosAnuncio.getDataCriacao() != null) meuAnuncio.setDataCriacao(dadosAnuncio.getDataCriacao());
+//		if(dadosAnuncio.getDataEncerramento() != null) meuAnuncio.setDataEncerramento(dadosAnuncio.getDataEncerramento());		
+//		if(dadosAnuncio.getIdPessoa() != null) meuAnuncio.setIdPessoa(dadosAnuncio.getIdPessoa());
+//		if(dadosAnuncio.getIdAnimal() != null) meuAnuncio.setIdAnimal(dadosAnuncio.getIdAnimal());
+//		if(dadosAnuncio.getIdCategoria() != null) meuAnuncio.setIdCategoria(dadosAnuncio.getIdCategoria());
+//		
+//		anuncioRepository.save(meuAnuncio);
+//		return meuAnuncio;
+//	}
+	@PutMapping("atualizastatus/{idAnuncio}")
+	public Anuncio updateStatusAnuncio(@PathVariable Integer idAnuncio) throws Exception{
 		
 		AnuncioStatusConverter statusConverter = new AnuncioStatusConverter();
 		Anuncio meuAnuncio = anuncioRepository.findById(idAnuncio)
 				.orElseThrow(()-> new IllegalAccessException());
 		
-
-		if(!dadosAnuncio.getStatus().isEmpty()) meuAnuncio.setStatus(statusConverter.convertToEntityAttribute(dadosAnuncio.getStatus()));
-		if(dadosAnuncio.getDataCriacao() != null) meuAnuncio.setDataCriacao(dadosAnuncio.getDataCriacao());
-		if(dadosAnuncio.getDataEncerramento() != null) meuAnuncio.setDataEncerramento(dadosAnuncio.getDataEncerramento());		
-		if(dadosAnuncio.getIdPessoa() != null) meuAnuncio.setIdPessoa(dadosAnuncio.getIdPessoa());
-		if(dadosAnuncio.getIdAnimal() != null) meuAnuncio.setIdAnimal(dadosAnuncio.getIdAnimal());
-		if(dadosAnuncio.getIdCategoria() != null) meuAnuncio.setIdCategoria(dadosAnuncio.getIdCategoria());
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		System.out.println(formatter.format(date));
+		
+		if(meuAnuncio.getStatus().equals("Ativo")) {
+			meuAnuncio.setStatus(statusConverter.convertToEntityAttribute("Inativo"));
+			meuAnuncio.setDataEncerramento(date);
+			
+		}
+		else if(meuAnuncio.getStatus().equals("Inativo")) {
+			meuAnuncio.setStatus(statusConverter.convertToEntityAttribute("Ativo"));
+			meuAnuncio.setDataEncerramento(null);
+		} 
 		
 		anuncioRepository.save(meuAnuncio);
 		return meuAnuncio;

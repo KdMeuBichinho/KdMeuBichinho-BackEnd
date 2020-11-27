@@ -27,15 +27,12 @@ public class Mensagem {
 	private Integer idMensagem;
 	@Column(name = "data_mensagem")
 	private Date dataMensagem;
-	
 	private String mensagem;
-	
 	@JoinColumn(name = "fk_id_pessoa")
 	@OneToOne
 	private Pessoa idPessoa;
-	
 	@JoinColumn(name = "fk_id_anuncio")
 	@ManyToOne
 	@JsonIgnoreProperties("mensagens")
-	private Anuncio idAnuncio;
+	private Anuncio idAnuncio;	
 }
