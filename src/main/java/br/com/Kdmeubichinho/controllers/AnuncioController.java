@@ -131,6 +131,7 @@ public class AnuncioController{
 				.orElseThrow(()-> new IllegalAccessException());
 		
 		Date date = new Date();
+		date.setHours((date.getHours()) -3);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		System.out.println(formatter.format(date));
 		
