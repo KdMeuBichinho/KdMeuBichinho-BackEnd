@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import br.com.Kdmeubichinho.enums.AnimalClassificacaoEtaria;
 import br.com.Kdmeubichinho.enums.AnimalPorte;
@@ -27,7 +26,6 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@Table(name = "animal", schema = "kdmeubichinho")
 public class Animal {
 	
 	@Id

@@ -20,7 +20,7 @@ public class Especie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_especie", nullable = false)
+	@Column(name = "id_especie")
 	private Integer idEspecie;
 	@Column(nullable = false)
 	private String nome;

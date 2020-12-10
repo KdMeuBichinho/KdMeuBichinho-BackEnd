@@ -28,8 +28,11 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pessoa")
     private Integer idPessoa;
+	@Column(nullable = false)
     private String nome;
+	@Column(nullable = false)
     private String email;
+	@Column(nullable = false)
     private String cep;
     private String logradouro;
     private String complemento;
@@ -40,7 +43,10 @@ public class Pessoa {
     private String ddd;
     @Column(name = "numero_residencial")
     private String numeroResidencial;
+    
+    @Column(nullable = false)
     private String celular;
+    @Column(nullable = false)
     private String senha;
     private boolean admin;
     

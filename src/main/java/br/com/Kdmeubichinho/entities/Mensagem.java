@@ -25,8 +25,9 @@ public class Mensagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_mensagem")
 	private Integer idMensagem;
-	@Column(name = "data_mensagem")
+	@Column(name = "data_mensagem", nullable = false)
 	private Date dataMensagem;
+	@Column(nullable = false)
 	private String mensagem;
 	@JoinColumn(name = "fk_id_pessoa")
 	@OneToOne

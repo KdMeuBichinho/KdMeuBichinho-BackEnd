@@ -1,5 +1,6 @@
 package br.com.Kdmeubichinho.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Foto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_foto;
+	@Column(nullable = false)
 	private String caminho;
 //	@OneToOne
 //	@JoinColumn(name = "fk_id_animal")

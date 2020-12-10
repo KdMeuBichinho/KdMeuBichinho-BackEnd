@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,7 +27,6 @@ import lombok.experimental.Accessors;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name = "anuncio", schema = "kdmeubichinho")
 @Accessors(chain = true)
 public class Anuncio {
 	
@@ -36,9 +34,9 @@ public class Anuncio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_anuncio")
 	private Integer idAnuncio;
-	@Column(name = "status_anuncio")
+	@Column(name = "status_anuncio", nullable = false)
 	private AnuncioStatus status;
-	@Column(name = "data_criacao")
+	@Column(name = "data_criacao", nullable = false)
 	private Date dataCriacao;
 	@Column(name = "data_encerramento")
 	private Date dataEncerramento;
