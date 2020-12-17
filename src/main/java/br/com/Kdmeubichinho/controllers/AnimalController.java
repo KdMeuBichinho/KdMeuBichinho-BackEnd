@@ -17,6 +17,7 @@ import br.com.Kdmeubichinho.converters.AnimalPorteConverter;
 import br.com.Kdmeubichinho.converters.AnimalSexoConverter;
 import br.com.Kdmeubichinho.entities.Animal;
 import br.com.Kdmeubichinho.repositories.AnimalRepository;
+import br.com.Kdmeubichinho.services.AnimalService;
 
 @RestController
 @RequestMapping(path = "animal")
@@ -25,9 +26,12 @@ public class AnimalController {
 	@Autowired
 	AnimalRepository animalRepository;
 	
+	@Autowired
+	AnimalService animalService;
+	
 	@GetMapping()
-	public Iterable<Animal> getAnimais(){
-		return animalRepository.findAll();
+	public Iterable<Animal> getAllAnimais(){
+		return animalService.getAllAnimals();
 	}
 	@GetMapping("/{id}")
 	public Optional<Animal> getById(@PathVariable Integer id){
