@@ -14,14 +14,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.Kdmeubichinho.services.JwtService;
-import br.com.Kdmeubichinho.services.PessoaServiceImpl;
+import br.com.Kdmeubichinho.services.PessoaService;
 
 public class JwtAuthFilter extends OncePerRequestFilter{
 
 	private JwtService jwtService;
-	private PessoaServiceImpl pessoaService;
+	private PessoaService pessoaService;
 	
-	public JwtAuthFilter(JwtService jwtService, PessoaServiceImpl pessoaService) {
+	public JwtAuthFilter(JwtService jwtService, PessoaService pessoaService) {
 		this.jwtService = jwtService;
 		this.pessoaService = pessoaService;
 	}

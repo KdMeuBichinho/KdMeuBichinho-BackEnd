@@ -14,63 +14,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.entities.Mensagem;
-import br.com.Kdmeubichinho.entities.Pessoa;
-import br.com.Kdmeubichinho.repositories.MensagemRepository;
-import br.com.Kdmeubichinho.repositories.PessoaRepository;
+import br.com.Kdmeubichinho.services.MensagemService;
 
 @RestController
 @RequestMapping(path = "/mensagem")
 @CrossOrigin
 public class MensagemController {
-
-	@Autowired
-	private MensagemRepository mensagemRepository;
 	
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private MensagemService mensagemService;
 	
 	@GetMapping()
-	public Iterable<Mensagem> getMensagem(){
-		return mensagemRepository.findAll();
+	public Iterable<Mensagem> getAllMessages(){
+		return mensagemService.getAllMessages();
 	}
-	
 	@GetMapping("/{id}")
-	public Optional<Mensagem> getById(@PathVariable Integer id){
-		return mensagemRepository.findById(id);
+	public Optional<Mensagem> getMessageById(@PathVariable Integer id){
+		return mensagemService.getMessageById(id);
 	}
-	
 	@PostMapping()
-	public Mensagem addMensagem(@RequestBody Mensagem mensagem){
-		
-		Optional<Pessoa> pessoa = pessoaRepository.findByEmail(mensagem.getIdPessoa().getEmail());
-		if(pessoa.isPresent()) {
-			Integer pessoaId = pessoa.get().getIdPessoa();
-			mensagem.getIdPessoa().setIdPessoa(pessoaId);
-		}
-		
-		System.out.println("IMPRIMINDO A DATA QUE ESTA VINDO" + mensagem.getDataMensagem());
-		
-		mensagemRepository.save(mensagem);
-		return mensagem;
+	public Mensagem addMessage(@RequestBody Mensagem message){
+		return mensagemService.addMessage(message);
 	}
-	
-	@PutMapping("/{idMensagem}")
-	public Mensagem updateMensagem(@PathVariable Integer idMensagem,@RequestBody Mensagem dadosMensagem) throws Exception{
-		
-		
-		Mensagem meuMensagem = mensagemRepository.findById(idMensagem)
-				.orElseThrow(()-> new IllegalAccessException());
-		
-
-		if(!dadosMensagem.getMensagem().isEmpty()) meuMensagem.setMensagem(dadosMensagem.getMensagem());
-		
-		
-		mensagemRepository.save(meuMensagem);
-		return meuMensagem;
+	@PutMapping("/{idMessage}")
+	public Mensagem updateMessage(@PathVariable Integer idMessage,@RequestBody Mensagem dataMessage) throws Exception{
+		return mensagemService.updateMessage(idMessage, dataMessage);
 	}
-	
 	@DeleteMapping("/{id}")
-	public void deleteMensagem(@PathVariable Integer id) {
-		mensagemRepository.deleteById(id);
+	public void deleteMessage(@PathVariable Integer id) {
+		mensagemService.deleteMessage(id);
 	} 
 }
