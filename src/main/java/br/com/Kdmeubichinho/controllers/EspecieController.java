@@ -12,27 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.dto.EspecieRequestDTO;
 import br.com.Kdmeubichinho.entities.Especie;
-import br.com.Kdmeubichinho.repositories.EspecieRepository;
+import br.com.Kdmeubichinho.services.EspecieService;
 
 @RestController
 @RequestMapping(path = "especie")
 public class EspecieController {
-	
+
 	@Autowired
-	EspecieRepository especieRepository;
-	
+	EspecieService especieService;
+
 	@GetMapping
-	public Iterable<Especie> getEspecie(){
-		return especieRepository.findAll();
+	public Iterable<Especie> getAllSpecies() {
+		return especieService.getAllSpecies();
 	}
-	
+
 	@GetMapping("/{id}")
-	public Optional<Especie> getEspecieById(@PathVariable Integer id){
-		return especieRepository.findById(id);
+	public Optional<Especie> getSpeciesById(@PathVariable Integer id) {
+		return especieService.getSpeciesById(id);
 	}
+
 	@PutMapping()
-	public EspecieRequestDTO addEspecie(@RequestBody EspecieRequestDTO especieRequestDTO) {
-		especieRepository.save(especieRequestDTO.build());
-		return especieRequestDTO;
+	public EspecieRequestDTO addSpecies(@RequestBody EspecieRequestDTO speciesRequestDTO) {
+		return especieService.addSpecies(speciesRequestDTO);
 	}
 }
