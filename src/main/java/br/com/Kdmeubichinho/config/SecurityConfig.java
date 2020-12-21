@@ -14,12 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.Kdmeubichinho.services.JwtService;
-import br.com.Kdmeubichinho.services.PessoaServiceImpl;
+import br.com.Kdmeubichinho.services.PessoaService;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	private PessoaServiceImpl pessoaService;
+	private PessoaService pessoaService;
 	@Autowired
 	private JwtService jwtService;
 	

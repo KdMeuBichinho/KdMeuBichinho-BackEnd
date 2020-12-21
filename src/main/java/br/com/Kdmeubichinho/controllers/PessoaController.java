@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import br.com.Kdmeubichinho.dto.CredenciaisDTO;
 import br.com.Kdmeubichinho.dto.PessoaDTO;
 import br.com.Kdmeubichinho.dto.TokenDTO;
 import br.com.Kdmeubichinho.entities.Pessoa;
-import br.com.Kdmeubichinho.exceptions.SenhaInvalidaException;
-import br.com.Kdmeubichinho.repositories.PessoaRepository;
-import br.com.Kdmeubichinho.services.JwtService;
-import br.com.Kdmeubichinho.services.PessoaServiceImpl;
+import br.com.Kdmeubichinho.services.PessoaService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -36,77 +30,46 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin
 public class PessoaController {
 	
-	private final PessoaServiceImpl pessoaService;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+	// private final PessoaServiceImpl pessoaService;
+    //private final PasswordEncoder passwordEncoder;
+    //private final JwtService jwtService;
+	
+	//@Autowired
+	//private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private PessoaService pessoaService;
 	
 	@GetMapping()
-	public Iterable<Pessoa> getPessoas(){
-		return pessoaRepository.findAll();
+	public Iterable<Pessoa> getAllPersons(){
+		return pessoaService.getAllPersons();
 	}
 	@GetMapping("/{id}")
-	public Optional<Pessoa> getById(@PathVariable Integer id){
-		return pessoaRepository.findById(id);
+	public Optional<Pessoa> getPersonById(@PathVariable Integer id){
+		return pessoaService.getPersonById(id);
 	}
 	@GetMapping("/email")
-	public Pessoa getByEmail(@RequestParam String email) {
-		return pessoaRepository.findOneByEmail(email);
+	public Pessoa getPersonByEmail(@RequestParam String email) {
+		return pessoaService.getPersonByEmail(email);
 	}
 	
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pessoa salvar( @RequestBody PessoaDTO pessoa ){
-    	System.out.println("Controller Entrou");
-        String senhaCriptografada = passwordEncoder.encode(pessoa.getSenha());
-        pessoa.setSenha(senhaCriptografada);
-        return pessoaService.salvar(pessoa.build());
+        return pessoaService.savePerson(pessoa);
     }
     @PostMapping("/auth")
     public ResponseEntity<TokenDTO> autenticar(@RequestBody CredenciaisDTO credenciais){
-        try{
-        	System.out.println(credenciais);
-            Pessoa pessoa = Pessoa.builder()
-                    .email(credenciais.getEmail())
-                    .senha(credenciais.getSenha()).build();
-            		pessoaService.autenticar(pessoa);
-            String token = jwtService.gerarToken(pessoa);
-            TokenDTO tokenDto =  new TokenDTO(pessoa.getEmail(), token);
-            return new ResponseEntity<TokenDTO>(tokenDto, HttpStatus.OK);
-            
-        } catch (UsernameNotFoundException | SenhaInvalidaException e ){
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
-        }
+    	return pessoaService.authenticatePerson(credenciais);
     }
     
-	@PutMapping("/{emailPessoa}")
-	public Pessoa updatePessoa(@PathVariable String emailPessoa,@RequestBody PessoaDTO dadosPessoa) throws Exception{
-		Pessoa myPessoa = pessoaRepository.findByEmail(emailPessoa)
-				.orElseThrow(()-> new IllegalAccessException());
-		
-		//if(!dadosPessoa.getEmail().isEmpty()) myPessoa.setEmail(dadosPessoa.getEmail());
-		if(!dadosPessoa.getNome().isEmpty()) myPessoa.setNome(dadosPessoa.getNome());
-		if(!dadosPessoa.getCelular().isEmpty()) myPessoa.setCelular(dadosPessoa.getCelular());
-		if(!dadosPessoa.getCep().isEmpty()) myPessoa.setCep(dadosPessoa.getCep());
-		if(!dadosPessoa.getLogradouro().isEmpty()) myPessoa.setLogradouro(dadosPessoa.getLogradouro());
-		if(!dadosPessoa.getComplemento().isEmpty()) myPessoa.setComplemento(dadosPessoa.getComplemento());
-		if(!dadosPessoa.getBairro().isEmpty()) myPessoa.setBairro(dadosPessoa.getBairro());
-		if(!dadosPessoa.getLocalidade().isEmpty()) myPessoa.setLocalidade(dadosPessoa.getLocalidade());
-		if(!dadosPessoa.getUf().isEmpty()) myPessoa.setUf(dadosPessoa.getUf());
-		if(!dadosPessoa.getIbge().isEmpty()) myPessoa.setIbge(dadosPessoa.getIbge());
-		if(!dadosPessoa.getDdd().isEmpty()) myPessoa.setDdd(dadosPessoa.getDdd());
-		if(!dadosPessoa.getNumeroResidencial().isEmpty()) myPessoa.setNumeroResidencial(dadosPessoa.getNumeroResidencial());
-		myPessoa.setComplemento(dadosPessoa.getComplemento());
-		//if(!dadosPessoa.getSenha().isEmpty()) myPessoa.setSenha(dadosPessoa.getSenha());
-		
-		pessoaRepository.save(myPessoa);
-		return myPessoa;
+	@PutMapping("/{emailPerson}")
+	public Pessoa updatePessoa(@PathVariable String emailPerson,@RequestBody PessoaDTO dataPerson) throws Exception{
+		return pessoaService.updatePerson(emailPerson, dataPerson);
 	}
 	@DeleteMapping("/{id}")
 	public void deletePessoa(@PathVariable Integer id) {
-		pessoaRepository.deleteById(id);
+		pessoaService.deletePerson(id);
 	}
 
 }
