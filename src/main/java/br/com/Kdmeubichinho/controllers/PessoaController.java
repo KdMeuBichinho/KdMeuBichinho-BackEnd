@@ -30,13 +30,6 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin
 public class PessoaController {
 	
-	// private final PessoaServiceImpl pessoaService;
-    //private final PasswordEncoder passwordEncoder;
-    //private final JwtService jwtService;
-	
-	//@Autowired
-	//private PessoaRepository pessoaRepository;
-	
 	@Autowired
 	private PessoaService pessoaService;
 	
