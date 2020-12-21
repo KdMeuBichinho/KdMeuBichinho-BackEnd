@@ -12,26 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.Kdmeubichinho.dto.CategoriaRequestDTO;
 import br.com.Kdmeubichinho.entities.Categoria;
-import br.com.Kdmeubichinho.repositories.CategoriaRepository;
+import br.com.Kdmeubichinho.services.CategoriaService;
 
 @RestController
 @RequestMapping(path = "categoria")
 public class CategoriaController {
-	
+
 	@Autowired
-	CategoriaRepository categoriaRepository;
-	
+	CategoriaService categoriaService;
+
 	@GetMapping
-	public Iterable<Categoria> getCategoria(){
-		return categoriaRepository.findAll();
+	public Iterable<Categoria> getAllCategory() {
+		return categoriaService.getAllCategory();
 	}
+
 	@GetMapping("/{id}")
-	public Optional<Categoria> getCategoriaById(@PathVariable Integer id){
-		return categoriaRepository.findById(id);
+	public Optional<Categoria> getCategoryById(@PathVariable Integer id) {
+		return categoriaService.getCategoryById(id);
 	}
+
 	@PutMapping()
-	public CategoriaRequestDTO addCategoria(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
-		categoriaRepository.save(categoriaRequestDTO.build());
-		return categoriaRequestDTO;
+	public CategoriaRequestDTO addCategory(@RequestBody CategoriaRequestDTO categoryRequestDTO) {
+		return categoriaService.addCategoria(categoryRequestDTO);
 	}
 }
