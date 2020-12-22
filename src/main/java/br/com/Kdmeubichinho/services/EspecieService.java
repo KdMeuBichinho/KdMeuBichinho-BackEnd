@@ -28,4 +28,8 @@ public class EspecieService {
 		return speciesRequestDTO;
 	}
 
+	public void deleteSpecies(Integer id) {
+		especieRepository.deleteById(id);
+	}
+
 }

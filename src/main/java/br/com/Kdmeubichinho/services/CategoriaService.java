@@ -23,9 +23,13 @@ public class CategoriaService {
 		return categoriaRepository.findById(id);
 	}
 
-	public CategoriaRequestDTO addCategoria(CategoriaRequestDTO categoryRequestDTO) {
+	public CategoriaRequestDTO addCategory(CategoriaRequestDTO categoryRequestDTO) {
 		categoriaRepository.save(categoryRequestDTO.build());
 		return categoryRequestDTO;
+	}
+
+	public void deleteCategory(Integer id) {
+		categoriaRepository.deleteById(id);
 	}
 
 }
